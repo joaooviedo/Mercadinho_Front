@@ -1,7 +1,7 @@
 import "./Home.css";
-import ProdutoList from "./ProdutoList";
-import sacola from "../assets/icons/sacola.png";
-import logo from "../assets/logo.png";
+import ProdutoList from "../../components/ProdutoLista/ProdutoList";
+import sacola from "../../assets/icons/sacola.png";
+import logo from "../../assets/logo.png";
 
 function Home() {
   return (
