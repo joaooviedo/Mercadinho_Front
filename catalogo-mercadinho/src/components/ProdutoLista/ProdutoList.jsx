@@ -1,6 +1,7 @@
 import { useState } from "react";
-import "./ProdutoList.css";
+import ProdutoListaItem from "../ProdutoListaItem/ProdutoListItem";
 import { produtos } from "../../mocks/produtos";
+import "./ProdutoList.css";
 
 function ProdutoList() {
   const [produtoSelecionado, setProdutoSelecionado] = useState({});
@@ -19,53 +20,17 @@ function ProdutoList() {
     setProdutoSelecionado({ ...produtoSelecionado, ...produto });
   };
 
-  const badgeCounter = (canRender, index) =>
-    Boolean(canRender) && (
-      <span className="ProdutoListaItem__badge">
-        {" "}
-        {produtoSelecionado[index]}{" "}
-      </span>
-    );
-
-  const removeButton = (canRender, index) =>
-    Boolean(canRender) && (
-      <button className="Acoes__remover" onClick={() => removerItem(index)}>
-        remover
-      </button>
-    );
-
   return (
     <div className="ProdutoLista">
       {produtos.map((produto, index) => (
-        <div className="ProdutoListaItem" key={`ProdutoListaItem-${index}`}>
-          {badgeCounter(produtoSelecionado[index], index)}
-          <div>
-            <div className="ProdutoListaItem__titulo">{produto.titulo}</div>
-            <div className="ProdutoListaItem__preco">
-              R$ {produto.preco.toFixed(2)}
-            </div>
-            <div className="ProdutoListaItem__descricao">
-              {" "}
-              {produto.descricao}{" "}
-            </div>
-            <div className="ProdutoListaItem__acoes Acoes">
-              <button
-                className={`Acoes__adicionar ${
-                  !produtoSelecionado[index] && "Acoes__adicionar--preencher"
-                }`}
-                onClick={() => adicionarItem(index)}
-              >
-                adicionar
-              </button>
-              {removeButton(produtoSelecionado[index], index)}
-            </div>
-          </div>
-          <img
-            className="ProdutoListaItem__foto"
-            src={produto.foto}
-            alt={`Produto de ${produto.sabor}`}
-          />
-        </div>
+        <ProdutoListaItem
+          key={`ProdutoListaItem=${index}`}
+          produto={produto}
+          quantidadeSelecionada={produtoSelecionado[index]}
+          index={index}
+          onAdd={(index) => adicionarItem(index)}
+          onRemove={(index) => removerItem(index)}
+        />
       ))}
     </div>
   );
