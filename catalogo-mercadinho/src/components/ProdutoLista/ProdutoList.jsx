@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ProdutoListaItem from "../ProdutoListaItem/ProdutoListItem";
-import { produtos } from "../../mocks/produtos";
 import "./ProdutoList.css";
+import { ProdutoService } from "../../services/ProdutoService";
 
 function ProdutoList() {
+  const [produtos, setProdutos] = useState([]);
   const [produtoSelecionado, setProdutoSelecionado] = useState({});
 
   const adicionarItem = (produtoIndex) => {
@@ -19,6 +20,13 @@ function ProdutoList() {
     };
     setProdutoSelecionado({ ...produtoSelecionado, ...produto });
   };
+  const getLista = async () => {
+    const response = await ProdutoService.getLista();
+    setProdutos(response);
+  };
+  useEffect(() => {
+    getLista();
+  }, []);
 
   return (
     <div className="ProdutoLista">

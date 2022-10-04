@@ -20,9 +20,10 @@ function ProdutoListaItem({ produto, quantidadeSelecionada, index, onRemove, onA
     <div className="ProdutoListaItem">
       {badgeCounter(quantidadeSelecionada, index)}
       <div>
-        <div className="ProdutoListaItem__titulo">{produto.titulo}</div>
-        <div className="ProdutoListaItem__preco">
-          R$ {produto.preco.toFixed(2)}
+        <div className="ProdutoListaItem__nome">{produto.nome}</div>
+        <div className="ProdutoListaItem__tamanho">{produto.tamanho}</div>
+        <div className="ProdutoListaItem__valor">
+          R$ {produto.valor.toFixed(2)}
         </div>
         <div className="ProdutoListaItem__descricao"> {produto.descricao} </div>
         <div className="ProdutoListaItem__acoes Acoes">
@@ -40,7 +41,7 @@ function ProdutoListaItem({ produto, quantidadeSelecionada, index, onRemove, onA
       <img
         className="ProdutoListaItem__foto"
         src={produto.foto}
-        alt={`Produto de ${produto.sabor}`}
+        alt={`Produto ${produto.marca}`}
       />
     </div>
   );
