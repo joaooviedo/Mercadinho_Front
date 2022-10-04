@@ -24,6 +24,7 @@ function ProdutoList() {
     const response = await ProdutoService.getLista();
     setProdutos(response);
   };
+  
   useEffect(() => {
     getLista();
   }, []);
